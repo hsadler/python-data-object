@@ -1,0 +1,33 @@
+
+# parent image
+FROM alpine:3.6
+
+# copy python requirements file
+COPY requirements.txt /tmp/requirements.txt
+
+# OS installs, pip installs, etc. (https://pkgs.alpinelinux.org/packages)
+RUN apk add --no-cache \
+    python3 \
+    python3-dev \
+    nodejs \
+    nodejs-npm \
+    bash \
+    mariadb-dev \
+    build-base \
+    supervisor && \
+    python3 -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip3 install pip setuptools && \
+    pip3 install -r /tmp/requirements.txt
+
+# custom Supervisord config
+COPY config/supervisord.dev.conf /etc/supervisord.conf
+
+# npm installs
+COPY app/client/package.json /tmp/package.json
+RUN cd /tmp && \
+	npm install && \
+	mkdir -p /app/client && \
+	cp -a /tmp/node_modules /app/client/
+
+# the rest is handled by the docker-compose.dev.yml file
