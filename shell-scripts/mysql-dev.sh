@@ -1,2 +1,2 @@
 
-docker exec -it flask-vue-mysql-dev mysql -uroot -ppassword
+docker exec -it pydo-mysql-dev mysql -uroot -ppassword

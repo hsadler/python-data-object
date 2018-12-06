@@ -1,2 +1,2 @@
 
-docker exec -it flask-vue-redis-dev /bin/sh
+docker exec -it pydo-redis-dev /bin/sh
