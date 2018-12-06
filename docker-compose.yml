@@ -8,31 +8,30 @@ services:
     build:
       context: .
       dockerfile: 'Dockerfile'
-    image: flask-vue
-    container_name: flask-vue
+    image: pydo
+    container_name: pydo
     restart: always
     links:
       - mysql:mysql
       - redis:redis
-    ports:
-     - "80:80"
-    volumes:
-     - /app/client/node_modules
-    command: /usr/bin/supervisord
+    # not needed unless opened as a service
+    # ports:
+    #  - "80:80"
+    # command: /usr/bin/supervisord
 
   mysql:
     image: mysql:5.7
-    container_name: flask-vue-mysql
+    container_name: pydo-mysql
     restart: always
     volumes:
      - ./mysql_store:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=flask_vue_project_seed
+      - MYSQL_DATABASE=pydo
 
   adminer:
     image: adminer:4.6.2
-    container_name: flask-vue-adminer
+    container_name: pydo-adminer
     restart: always
     links:
       - mysql:mysql
@@ -41,7 +40,7 @@ services:
 
   redis:
     image: redis:4.0.9-alpine
-    container_name: flask-vue-redis
+    container_name: pydo-redis
     restart: always
     volumes:
      - ./redis_store:/data
