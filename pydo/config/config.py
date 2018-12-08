@@ -6,7 +6,7 @@
 MASTER_MYSQL_HOST = 'mysql'
 MASTER_MYSQL_USER = 'root'
 MASTER_MYSQL_PASSWORD = 'password'
-MASTER_MYSQL_DB_NAME = 'flask_vue_project_seed'
+MASTER_MYSQL_DB_NAME = 'pydo'
 
 
 # Redis Cache
