@@ -12,15 +12,15 @@ RUN apk add --no-cache \
     bash \
     mariadb-dev \
     build-base \
-    # supervisor \
-    # nginx \
-    # uwsgi \
-    # uwsgi-python3 && \
+    supervisor \
+    nginx \
+    uwsgi \
+    uwsgi-python3 && \
     python3 -m ensurepip && \
     rm -r /usr/lib/python*/ensurepip && \
     pip3 install pip setuptools && \
     pip3 install -r /tmp/requirements.txt && \
-    # rm /etc/nginx/conf.d/default.conf && \
+    rm /etc/nginx/conf.d/default.conf && \
     rm -r /root/.cache
 
 # copy the Nginx global conf
@@ -33,7 +33,7 @@ RUN apk add --no-cache \
 # COPY config/uwsgi.ini /etc/uwsgi/
 
 # copy custom Supervisord config
-# COPY config/supervisord.conf /etc/supervisord.conf
+COPY config/supervisord.conf /etc/supervisord.conf
 
 # copy app
 COPY ./pydo /pydo

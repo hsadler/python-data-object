@@ -17,7 +17,7 @@ services:
     # not needed unless opened as a service
     # ports:
     #  - "80:80"
-    # command: /usr/bin/supervisord
+    command: /usr/bin/supervisord
 
   mysql:
     image: mysql:5.7
